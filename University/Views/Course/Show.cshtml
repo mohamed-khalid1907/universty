@@ -1,0 +1,66 @@
+﻿@model List<Course>
+@{
+    Layout = "_Layout";
+}
+<div class="dash-content">
+    <div class="overview">
+        <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">All Courses</span>
+        </div>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td class="table-light">id</td>
+                    <td class="table-light">Corse Name</td>
+                    <td class="table-light">Professor Name</td>
+                    <td class="table-light">Students</td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var obj in Model.OrderBy(e => e.CourseId))
+                    {
+
+                        <tr>
+
+                            <td>@obj.CourseId</td>
+                            <td>@obj.CourseName</td>
+                            <td>@obj.Professor.ProfessorName</td>
+                           
+                            <td>
+                                @{
+                                    foreach (var x in obj.Students)
+                                    {
+                                    <td>@x.FirstName+" "+@x.LastTName</td>
+                                    }
+                                }</td>
+
+
+                            <td>
+                                <a asp-action="Delte" asp-controller="Course" asp-route-id="@obj.CourseId" class="btn btn-success" role="button">
+                                    <span class="material-symbols-outlined">
+                                        Delete Course
+                                    </span>
+                                </a><a asp-action="Update" asp-controller="Student" asp-route-id="@obj.CourseId" class="btn btn-success" role="button">
+                                    <span class="material-symbols-outlined">
+                                        Edit Course
+                                    </span>
+                                </a>
+
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+</div>

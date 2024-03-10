@@ -1,0 +1,70 @@
+﻿@model List<Student>
+@{
+    Layout = "_Layout";
+}
+<div class="dash-content">
+    <div class="overview">
+        <div class="title">
+            <i class="uil uil-tachometer-fast-alt"></i>
+            <span class="text">All Students</span>
+        </div>
+    </div>
+    <div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td class="table-light">id</td>
+                    <td class="table-light">First Name</td>
+                    <td class="table-light">Last Name</td>
+                    <td class="table-light">Email</td>
+                    <td class="table-light">Major</td>
+                    <td class="table-light">Courses</td>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var obj in Model.OrderBy(e => e.StudentId))
+                    {
+
+                        <tr>
+
+                            <td>@obj.StudentId</td>
+                            <td>@obj.FirstName</td>
+                            <td>@obj.LastTName</td>
+                            <td>@obj.Email</td>
+                            <td>@obj.Major</td>
+                            <td>@{
+                                    foreach (var x in obj.Courses)
+                                    {
+                                    <td>@x.CourseName</td>
+                                    }
+                                }</td>
+                            <td>
+                                <a asp-action="AssignCourse" asp-controller="Student" asp-route-id="@obj.StudentId" class="btn btn-success" role="button">
+                                    <span class="material-symbols-outlined">
+                                        Assign Course
+                                    </span>
+                                </a><a asp-action="Delte" asp-controller="Student" asp-route-id="@obj.StudentId" class="btn btn-success" role="button">
+                                    <span class="material-symbols-outlined">
+                                        Delete Student
+                                    </span>
+                                </a><a asp-action="Update" asp-controller="Student" asp-route-id="@obj.StudentId" class="btn btn-success" role="button">
+                                    <span class="material-symbols-outlined">
+                                        Edit Student
+                                    </span>
+                                </a>
+                               
+                            </td>
+
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+
+
+
+</div>
